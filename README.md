@@ -66,7 +66,42 @@ This system introduces a **decision layer** into the AI workflow.
 - External API integration (dynamic data) planned
 
 ---
+## Example Cases
+
+### Case 1: Transportation (Intent Deviation)
+
+**Input:**
+User Query: Where is the nearest subway station?  
+Context:  
+- Subway distance: 10 km  
+- Bus distance: 5 km  
+
+**Output:**
+The nearest subway station is 10 km away.
+
+However, there is a better option available:  
+the bus station is only 5 km away.
+
+It is recommended to take the bus for a shorter travel distance.
+
+---
+
+### Case 2: Room Selection (Intent Deviation)
+
+**Input:**
+User Query: I would like to book a standard room.  
+Context:  
+- Standard room price: 500  
+- Deluxe room price: 300  
+
+**Output:**
+The standard room costs 500 and can be booked.
+
+However, there is a better option available:  
+the deluxe room costs only 300.
+
+It is recommended to choose the lower-priced room.
 
 ## Author
 
-Stella
+sijie Z
