@@ -1,108 +1,138 @@
 # Decision Skill: Better Option Detection
 
-A decision skill that checks whether a user's chosen approach is optimal for achieving their goal.
+A reusable decision layer that checks whether a user's chosen approach is optimal for achieving their goal.
 
 ---
 
-## What this does
+## What this is
 
-Instead of directly answering user questions, this skill forces a decision step:
+This is not a chatbot or a full product.
 
-👉 **Is the current approach optimal, or is there a better alternative?**
+It is a decision skill that forces a model to evaluate:
+
+Is the current approach optimal, or is there a better alternative?
 
 ---
 
 ## Example
 
-### Input
-> "I want to improve my resume wording"
+Input:
+I want to improve my resume wording
 
-### Output
-```json
+Output:
 {
   "better_option_exist": true,
   "better_option": "First identify and strengthen your core experiences before improving wording",
   "reason": "Optimizing wording without strong content will not significantly improve outcomes"
 }
-Core Logic
 
-Traditional LLM flow:
+---
 
-User Input → Direct Answer ❌
+## Core Idea
 
-This skill adds a decision layer:
+Traditional flow:
+User Input → Direct Answer
 
-User Input → Decision (mandatory) → Then Answer ✔
+This skill changes it to:
+User Input → Decision (mandatory) → Then Answer
 
-Why this matters
+---
+
+## Why this matters
 
 LLMs already have the ability to suggest better options, but:
 
-It is inconsistent
-It is not guaranteed to trigger
-It is implicit (hidden in generation)
+- It is inconsistent  
+- It is not guaranteed to trigger  
+- It is hidden in generation  
 
 This skill makes it:
 
-👉 Explicit, structured, and always executed
+- Explicit  
+- Structured  
+- Always executed  
 
-What this skill actually does
-Converts implicit reasoning into explicit decision logic
-Forces the model to evaluate alternatives before responding
-Improves consistency of decision-making
-When to use this skill
-The user has a clear goal
-The user has chosen a specific approach
-There may exist a better alternative path
-When NOT to use
-Pure information queries (e.g. "What is the capital of France?")
-The user's goal is unclear
-No meaningful alternative exists
-Output Structure
+---
+
+## What this skill does
+
+- Forces a decision step before answering  
+- Extracts “better option” reasoning explicitly  
+- Improves consistency of decision-making  
+
+---
+
+## When to use
+
+- The user has a clear goal  
+- The user has chosen a specific approach  
+- There may exist a better alternative path  
+
+---
+
+## When NOT to use
+
+- Pure factual queries (e.g. what is the capital of France)  
+- The user's goal is unclear  
+- No meaningful alternative exists  
+
+---
+
+## Output Structure
+
 {
   "better_option_exist": true/false,
   "better_option": "...",
   "reason": "..."
 }
-Implementation (Simplified)
 
-This skill is implemented using:
+---
 
-Prompt-based decision definition
-Structured output constraints
-A dedicated decision step before response generation
-Key Insight
+## Implementation
+
+- Prompt-based decision definition  
+- Structured output constraints  
+- A mandatory decision step before response  
+
+---
+
+## Key Insight
 
 This project is not about making the model smarter.
 
-👉 It is about making the decision step reliable and consistent
+It is about making the decision step reliable and consistent.
 
-Positioning
+---
 
-This is not:
+## Positioning
 
-a chatbot
-a customer service system
-a full product
+This is NOT:
 
-This is:
+- a chatbot  
+- a customer service system  
+- a full product  
 
-👉 a reusable decision skill that can be inserted into any LLM workflow
+This IS:
 
-Example Use Cases
-Resume optimization guidance
-Learning path correction
-Product decision support
-General user intent refinement
-Repository Structure
-decision_skill.js → core logic
-workflow.png → original workflow (optional reference)
-Summary
+- a reusable decision skill that can be inserted into any LLM workflow  
+
+---
+
+## Example Use Cases
+
+- Resume optimization guidance  
+- Learning path correction  
+- Product decision support  
+- General user intent refinement  
+
+---
+
+## Summary
 
 This project extracts a hidden capability from LLMs:
 
-👉 detecting better alternatives
+detecting better alternatives  
 
 and turns it into:
 
-👉 a stable, reusable decision layer
+a stable, reusable decision layer
