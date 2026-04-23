@@ -6,35 +6,24 @@ A reusable decision layer that checks whether a user's chosen approach is optima
 
 ## What this is
 
-This is not a chatbot or a full product.
+This is not a chatbot.  
+This is not a full product.  
 
-It is a decision skill that forces a model to evaluate:
+This is a **decision skill** that forces a model to evaluate:
 
 👉 Is the current approach optimal, or is there a better alternative?
-
----
-
-## Example
-
-Input:
-I want to quickly improve my resume wording to pass screening
-
-Output:
-{
-  "better_option_exist": true,
-  "better_option": "First identify and strengthen your core experiences before improving wording",
-  "reason": "Optimizing wording without strong content will not significantly improve outcomes"
-}
 
 ---
 
 ## Core Idea
 
 Traditional flow:
-User Input → Direct Answer ❌
+
+User Input → Direct Answer ❌  
 
 This skill changes it to:
-User Input → Decision (mandatory) → Then Answer ✅
+
+User Input → Decision (mandatory) → Then Answer ✅  
 
 ---
 
@@ -78,61 +67,67 @@ This skill makes it:
 
 ---
 
-## Output Structure
+## Standard Input
 
+```json
 {
-  "better_option_exist": true/false,
-  "better_option": "...",
-  "reason": "..."
+  "user_query": "I want to quickly improve my resume wording to pass screening"
 }
+Standard Output
+{
+  "better_option_exist": true,
+  "user_goal": "pass screening quickly",
+  "current_approach": "improve resume wording",
+  "better_option": "strengthen core experiences before optimizing wording",
+  "reason": "Improving wording without strong content has limited impact."
+}
+Field Explanation
+better_option_exist: Whether a better option exists
+user_goal: The actual goal the user wants to achieve
+current_approach: The approach the user is currently taking
+better_option: A more optimal way to achieve the goal
+reason: Why the current approach is not optimal
+Example
+Input
+{
+  "user_query": "Should I take the subway to the airport?"
+}
+Output
+{
+  "better_option_exist": true,
+  "user_goal": "get to the airport conveniently",
+  "current_approach": "take the subway",
+  "better_option": "take the airport shuttle",
+  "reason": "The shuttle is more direct and convenient in this scenario."
+}
+How to Use
 
----
+This skill is designed to be used before response generation in an AI workflow.
 
-## Implementation
+Basic logic:
 
-- Prompt-based decision definition  
-- Structured output constraints  
-- A mandatory decision step before response generation  
+Send user input to this skill
+Receive structured decision result
+If better_option_exist = true → adjust response strategy
+If false → proceed with normal answer
+Implementation
+Prompt-based decision definition
+Structured output constraints
+A mandatory decision step before response generation
+Positioning
 
----
+This is NOT:
 
-## Key Insight
+a chatbot
+a customer service system
+a full product
+
+This IS:
+
+👉 a reusable decision skill that can be inserted into any LLM workflow
+
+Key Insight
 
 This project is not about making the model smarter.
 
 👉 It is about making the decision step reliable and consistent.
-
----
-
-## Positioning
-
-This is NOT:
-
-- a chatbot  
-- a customer service system  
-- a full product  
-
-This IS:
-
-👉 a reusable decision skill that can be inserted into any LLM workflow  
-
----
-
-## Example Use Cases
-
-- Resume optimization guidance  
-- Learning path correction  
-- Product decision support  
-- General user intent refinement  
-
----
-
-## Summary
-
-This project takes a capability that LLMs already have:
-
-"occasionally identifying better options"
-
-and turns it into:
-
-👉 "a decision step that is always executed, structured, and reliable"
